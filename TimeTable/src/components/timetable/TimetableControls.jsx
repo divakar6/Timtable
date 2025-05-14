@@ -1,4 +1,3 @@
-import { Button } from "../../components/common/Button"
 import { useTimetable } from '../../hooks/useTimetable';
 import { useSubjects } from '../../hooks/useSubjects';
 
@@ -7,21 +6,22 @@ export function TimetableControls() {
   const { timetable, isLoading, createTimetable, resetTimetable } = useTimetable();
 
   return (
-    <div className="flex gap-4 mb-6">
-      <Button
+    <div className="controls-container">
+      <button
         onClick={() => createTimetable(subjects)}
         disabled={subjects.length === 0 || isLoading}
+        className="btn btn-primary"
       >
         {isLoading ? 'Generating...' : 'Generate Timetable'}
-      </Button>
+      </button>
       {timetable && (
-        <Button
+        <button
           onClick={resetTimetable}
-          variant="danger"
           disabled={isLoading}
+          className="btn btn-danger"
         >
           Reset Timetable
-        </Button>
+        </button>
       )}
     </div>
   );

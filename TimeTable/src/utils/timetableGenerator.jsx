@@ -31,7 +31,7 @@ export function generateTimetable(subjects) {
         currentDayTimetable[randomPeriod] = {
           subject: subject.subject,
           teacher: subject.teacher,
-          subjectId: subject.id || Date.now() // Temporary ID if not provided
+          subjectId: subject.id || Date.now()
         };
         hoursLeft--;
       }

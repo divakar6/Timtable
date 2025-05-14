@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { Button } from '../../components/common/Button';
-import { InputField } from '../../components/common/InputField';
 import { validateSubjectInput } from '../../utils/validators';
 import { useSubjects } from '../../hooks/useSubjects';
 
@@ -26,7 +24,7 @@ export function SubjectForm() {
       addSubject({
         ...formData,
         hours: parseInt(formData.hours),
-        id: Date.now() // Temporary ID
+        id: Date.now()
       });
       setFormData({ subject: '', teacher: '', hours: '' });
       setErrors({});
@@ -36,35 +34,49 @@ export function SubjectForm() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Add New Subject</h2>
+    <div>
+      <h2 className="form-title">Add New Subject</h2>
       <form onSubmit={handleSubmit}>
-        <InputField
-          label="Subject Name"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          error={errors.subject}
-        />
-        <InputField
-          label="Teacher"
-          name="teacher"
-          value={formData.teacher}
-          onChange={handleChange}
-          error={errors.teacher}
-        />
-        <InputField
-          label="Weekly Hours"
-          name="hours"
-          type="number"
-          min="1"
-          value={formData.hours}
-          onChange={handleChange}
-          error={errors.hours}
-        />
-        <Button type="submit" variant="success">
+        <div className="form-group">
+          <label className="form-label">Subject Name</label>
+          <input
+            type="text"
+            name="subject"
+            value={formData.subject}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+          {errors.subject && <span style={{ color: 'red', fontSize: '14px' }}>{errors.subject}</span>}
+        </div>
+        <div className="form-group">
+          <label className="form-label">Teacher</label>
+          <input
+            type="text"
+            name="teacher"
+            value={formData.teacher}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+          {errors.teacher && <span style={{ color: 'red', fontSize: '14px' }}>{errors.teacher}</span>}
+        </div>
+        <div className="form-group">
+          <label className="form-label">Weekly Hours</label>
+          <input
+            type="number"
+            name="hours"
+            min="1"
+            value={formData.hours}
+            onChange={handleChange}
+            className="form-input"
+            required
+          />
+          {errors.hours && <span style={{ color: 'red', fontSize: '14px' }}>{errors.hours}</span>}
+        </div>
+        <button type="submit" className="btn btn-primary">
           Add Subject
-        </Button>
+        </button>
       </form>
     </div>
   );
